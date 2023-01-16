@@ -1,0 +1,7 @@
+/**
+ * View
+ */
+public class View {
+    
+    
+}
