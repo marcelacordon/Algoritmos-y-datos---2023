@@ -46,11 +46,10 @@ public class View {
     public void guardaremisora(){ // Guardar la emisora 
         String emisoras = "";
         if (bbRadio.getFrequence() == "AM"){ //En caso de que la radio se encuentre en AM
-            for (int i = 0; i< bbRadio.getAMSAVED().size();i++){ //Imprimir todas las emisoras guardadas en AM
-                emisoras += (i + ". " + bbRadio.getAMSAVED().get(i)+"\n");
-            }
-            respuesta  = Integer.parseInt(JOptionPane.showInputDialog("Puedes guardar la emisora actual en cualquiera de estos botones y reemplazar el existente:\n"+emisoras+"\nEscoge un número de índice")); //Le pregunta al usuario donde quiere guardar la emisora 
-            if (respuesta <= bbRadio.getAMSAVED().size()){ //En caso de que el usario escriba un indice valido
+
+            respuesta  = Integer.parseInt(JOptionPane.showInputDialog("Puedes guardar la emisora actual en cualquiera de los botones del 1-12\n\nEscoge un número de índice:")); //Le pregunta al usuario donde quiere guardar la emisora 
+            if (respuesta>0 && respuesta < 13){ //En caso de que el usario escriba un indice valido
+                respuesta = respuesta -1;
                 bbRadio.saveAMStation(bbRadio.getAMActualStation(), respuesta);
                 JOptionPane.showMessageDialog(null, "Emisora agregada a favoritas exitosamente!");
             }
@@ -59,11 +58,10 @@ public class View {
             }
         }
         else if (bbRadio.getFrequence() == "FM"){//En caso de que la radio se encuentre en FM
-            for (int i = 0; i< bbRadio.getFMSAVED().size();i++){//Imprimir todas las emisoras guardadas en FM
-                emisoras += i + ". " + bbRadio.getFMSAVED().get(i)+"\n";
-            }
-            respuesta  = Integer.parseInt(JOptionPane.showInputDialog("Puedes guardar la emisora actual en cualquiera de estos botones y reemplazar el existente:\n"+emisoras+"\nEscoge un número de índice")); //Le pregunta al usuario donde quiere guardar la emisora 
-            if (respuesta <= bbRadio.getFMSAVED().size()){//En caso de que el usario escriba un indice valido
+
+            respuesta  = Integer.parseInt(JOptionPane.showInputDialog("Puedes guardar la emisora actual en cualquiera de los botones del 1-12\n\nEscoge un número de índice:")); //Le pregunta al usuario donde quiere guardar la emisora 
+            if (respuesta>0 && respuesta < 13){//En caso de que el usario escriba un indice valido
+                respuesta = respuesta -1;
                 bbRadio.saveFMStation(bbRadio.getFMActualStation(), respuesta);
                 JOptionPane.showMessageDialog(null, "Emisora agregada a favoritas exitosamente!");
             }
@@ -80,16 +78,13 @@ public class View {
      * @throws Exception
      */
     public void escogeremisoraguardada() throws Exception{ //Escoger una emisora ya guardada 
-        respuesta = Integer.parseInt(JOptionPane.showInputDialog("De qué tipo de emisora quieres ver la lista de tus favoritas?\n1. AM\n2. FM"));
-        String emisoras = "";
+        respuesta = Integer.parseInt(JOptionPane.showInputDialog("De qué tipo de emisora quieres escoger de la lista de favoritas?\n1. AM\n2. FM"));
         int respuestita;
         if (respuesta == 1){//En caso que eliga escoger una emisora AM
             bbRadio.setFrequence("AM");
-            for (int i = 0; i< bbRadio.getAMSAVED().size();i++){//Imprimir todas las emisoras guardadas en AM
-                emisoras += i + ". " + bbRadio.getAMSAVED().get(i)+"\n";
-            }
-            respuestita = Integer.parseInt(JOptionPane.showInputDialog(emisoras+"\nIngresa el número de índice: "));
-            if (respuestita <= bbRadio.getAMSAVED().size()){//En caso de que el usaurio eliga un indice valido
+            respuestita = Integer.parseInt(JOptionPane.showInputDialog("\nIngresa el número de índice (del 1-12): "));
+            if (respuestita > 0 && respuestita <13){//En caso de que el usaurio eliga un indice valido
+                respuestita = respuestita -1;
                 bbRadio.setAMActualStation(bbRadio.getAMSlot(respuestita));
                 JOptionPane.showMessageDialog(null, "Emisora cambiada exitosamente!");
 
@@ -100,11 +95,9 @@ public class View {
         }
         if (respuesta == 2){//En caso que eliga escoger una emisora FM
             bbRadio.setFrequence("FM");
-            for (int i = 0; i< bbRadio.getFMSAVED().size();i++){//Imprimir todas las emisoras guardadas en FM
-                emisoras += i + ". " + bbRadio.getFMSAVED().get(i)+"\n";
-            }
-            respuestita = Integer.parseInt(JOptionPane.showInputDialog(emisoras+"\nIngresa el número de índice: "));
-            if (respuestita <= bbRadio.getFMSAVED().size()){//En caso de que el usaurio eliga un indice valido
+            respuestita = Integer.parseInt(JOptionPane.showInputDialog("\nIngresa el número de índice (del 1-12): "));
+            if (respuestita > 0 && respuestita <13){//En caso de que el usaurio eliga un indice valido
+                respuestita = respuestita -1;
                 bbRadio.setFMActualStation(bbRadio.getFMSlot(respuestita));
                 JOptionPane.showMessageDialog(null, "Emisora cambiada exitosamente!");
             }
