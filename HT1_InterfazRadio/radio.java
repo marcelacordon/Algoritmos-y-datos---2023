@@ -127,6 +127,8 @@ public class radio implements IRadio{
         else if (frequencetype == "FM"){
             if (FMstation > 87.9){
                 FMstation = FMstation - 0.2;
+                df.setRoundingMode(RoundingMode.HALF_UP);
+                FMstation = Double.parseDouble(df.format(FMstation));
             }
             else if (FMstation == 87.9){
                 FMstation = 107.9;
