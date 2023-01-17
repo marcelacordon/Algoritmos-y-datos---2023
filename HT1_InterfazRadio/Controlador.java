@@ -34,16 +34,22 @@ public class Controlador {
             }
             else if (choice ==4){
                 //guardar emisora
-
+                vista.guardaremisora();
 
             }
             else if (choice == 5){
+                //escoger una de las emisoras guardadas
+                vista.escogeremisoraguardada();
 
             }
             else if (choice == 6){
+                //apagar el radio
+                vista.adios();
+                on = false;
 
             }
             else {
+                vista.invalido();
 
             }
         }

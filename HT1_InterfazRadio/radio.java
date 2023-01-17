@@ -1,4 +1,6 @@
-
+//Importacion de Librerias
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -9,8 +11,35 @@ public class radio implements IRadio{
     private double FMstation = 87.9 ; // para ver la estación en la que se encuentra al estar en FM
     private ArrayList<Integer> AMSAVED = new ArrayList<Integer> (); //para guardar en los 12 slots emisoras de AM
     private ArrayList<Double> FMSAVED = new ArrayList<Double> (); //para guardar en los 12 slots emisoras de AM
+    DecimalFormat df = new DecimalFormat("#.#"); //Para lograr que los decimales de las emisoras tipo FM se guarden solo con un numero decimal
 
-    radio(){ }
+    radio(){ 
+        AMSAVED.add(530);
+        AMSAVED.add(540);
+        AMSAVED.add(550);
+        AMSAVED.add(560);
+        AMSAVED.add(570);
+        AMSAVED.add(580);
+        AMSAVED.add(590);
+        AMSAVED.add(600);
+        AMSAVED.add(610);
+        AMSAVED.add(620);
+        AMSAVED.add(630);
+        AMSAVED.add(640);
+        FMSAVED.add(87.9);
+        FMSAVED.add(88.1);
+        FMSAVED.add(88.3);
+        FMSAVED.add(88.5);
+        FMSAVED.add(88.9);
+        FMSAVED.add(89.1);
+        FMSAVED.add(89.3);
+        FMSAVED.add(89.5);
+        FMSAVED.add(89.9);
+        FMSAVED.add(90.1);
+        FMSAVED.add(90.3);
+        FMSAVED.add(90.5);
+
+    }
 
     // utilizado para prender la radio 
     @Override
@@ -74,6 +103,8 @@ public class radio implements IRadio{
         else if (frequencetype == "FM"){
             if (FMstation < 107.9){
                 FMstation = FMstation + 0.2;
+                df.setRoundingMode(RoundingMode.HALF_UP);
+                FMstation = Double.parseDouble(df.format(FMstation));
             }
             else if (FMstation >= 107.9){
                 FMstation = 87.9;
@@ -153,7 +184,7 @@ public class radio implements IRadio{
     @Override
     public void saveFMStation(double actualStation, int slot) {
         // TODO Auto-generated method stub
-        FMSAVED.add(slot,actualStation);
+        FMSAVED.set(slot,actualStation);
         
     }
 
@@ -165,7 +196,7 @@ public class radio implements IRadio{
     @Override
     public void saveAMStation(int actualStation, int slot) {
         // TODO Auto-generated method stub
-        AMSAVED.add(slot, actualStation);
+        AMSAVED.set(slot, actualStation);
     }
 
     //utilizado para obtener en que slot esta guardada la estacion en FM 
@@ -193,61 +224,109 @@ public class radio implements IRadio{
 
 
 
+    
+    /** 
+     * @return boolean
+     */
     // indica si esta prendido o apagado, prendido(true) y apagado (false)
     public boolean isOnoff() {
         return onoff;
     }
+    
+    /** 
+     * @param onoff
+     */
     // para actualizar el estado de la radio, si esta on u off
     public void setOnoff(boolean onoff) {
         this.onoff = onoff;
     }
 
+    
+    /** 
+     * @return String
+     */
     //para obtener en que tipo de frequencia se encuentra el usuario 
     public String getFrequencetype() {
         return frequencetype;
     }
 
+    
+    /** 
+     * @param frequencetype
+     */
     //utilizado para actualizar el 
     public void setFrequencetype(String frequencetype) {
         this.frequencetype = frequencetype;
     }
 
+    
+    /** 
+     * @return int
+     */
     //obtener en que estacion se encuentra en el AM 
     public int getAMstation() {
         return AMstation;
     }
 
+    
+    /** 
+     * @param aMstation
+     */
     //actualizar en que estacion se encuentra en el AM 
     public void setAMstation(int aMstation) {
         AMstation = aMstation;
     }
 
+    
+    /** 
+     * @return double
+     */
     //obtener en que estacion se encuentra en el FM 
     public double getFMstation() {
         return FMstation;
     }
 
+    
+    /** 
+     * @param fMstation
+     */
     //actualizar en que estacion se encuentra en el AM 
     public void setFMstation(double fMstation) {
         FMstation = fMstation;
     }
 
+    
+    /** 
+     * @return ArrayList<Integer>
+     */
     //para obtener la lista de las estaciones en AM 
     public ArrayList<Integer> getAMSAVED() {
         return AMSAVED;
     }
 
+    
+    /** 
+     * @param aMSAVED
+     */
     //para actualizar la lista de las estaciones en AM 
     public void setAMSAVED(ArrayList<Integer> aMSAVED) {
         AMSAVED = aMSAVED;
     }
 
+    
+    /** 
+     * @return ArrayList<Double>
+     */
     //para obtener la lista de las estaciones en FM 
     public ArrayList<Double> getFMSAVED() {
         return FMSAVED;
     }
 
-    //para actualizar la lista de las estaciones en FM 
+    
+    /** 
+     * @param fMSAVED
+     */
+    //para actualiz la lista de las estaciones en FM 
     public void setFMSAVED(ArrayList<Double> fMSAVED) {
         FMSAVED = fMSAVED;
     }

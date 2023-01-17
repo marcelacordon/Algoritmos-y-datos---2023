@@ -1,3 +1,4 @@
+//Importacion de Librerias
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -8,26 +9,34 @@ public class test extends TestCase{
     radio rad; 
 
     
-    private void pruebi (){
+    private void pruebi (){ //Iteración de Radio de Prueba 
         rad = new radio();
     }
     
     @Test
-    public void TestActualAm(){
+    public void TestActualAm(){ //Prueba para confirmar que la funcion Forward funciona correctamente en caso de estar en modo AM
         pruebi();
         rad.Forward();
         assertEquals(540, rad.getAMActualStation());
     }
 
+    
+    /** 
+     * @throws Exception
+     */
     @Test
-    public void PruebaFM() throws Exception{
+    public void PruebaFM() throws Exception{ //Prueba para confirmar que la funcion setFrequence funciona correctamente 
         pruebi();
         rad.setFrequence("FM");
         assertEquals("FM", rad.getFrequence());
     }
 
+    
+    /** 
+     * @throws Exception
+     */
     @Test
-    public void PruebaForwardFm() throws Exception{
+    public void PruebaForwardFm() throws Exception{ //Prueba para confirmar que la funcion Forward funciona correcamente en caso de estar en modo FM
         pruebi();
         rad.setFrequence("FM");
         rad.Forward();
@@ -35,7 +44,7 @@ public class test extends TestCase{
     }
 
     @Test
-    public void PruebaEstacionSave(){
+    public void PruebaEstacionSave(){ //Prueba para confirmar que la funcion saceAMStation funciona correctamente 
         pruebi();
         rad.saveAMStation(rad.getAMActualStation(), 0);
         assertTrue(rad.getAMSAVED().get(0) == 530);
