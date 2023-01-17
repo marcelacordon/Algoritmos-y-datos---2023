@@ -1,8 +1,0 @@
-/**
- * Controlador
- */
-public class Controlador {
-    
-
-    
-}
