@@ -1,8 +1,13 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte, Marcela Cordon 
+ * 
+ * @since:30/01/2023
+ **/
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import junit.framework.TestCase;
 
 @RunWith(JUnit4.class)
 public class Tests {
@@ -19,6 +24,12 @@ Calculator calc = new Calculator();
 
     @Test
     public void Test2(){ 
+       assertEquals(false, calc.isOperator("2"));
+       assertEquals(true, calc.isOperator("+"));
+    } 
+
+    @Test
+    public void Test3(){ 
        assertEquals(false, calc.isOperator("2"));
        assertEquals(true, calc.isOperator("+"));
     } 
