@@ -9,13 +9,11 @@
 
  /**
   * Stack
-  * 
   * Interface de un Stack.
   */
  public interface IStack<E> {
  
     /**
-     * pre:
      * post: el item se agrega a Stack 
      * va hacer popped si no hay un empuje intermedio
      * 
@@ -34,10 +32,9 @@
  
 
  
-   /** regresa verdadero si el stack está vacío
-    * post: returns true if and only if the stack is empty
+   /**
     * 
-    * @return True if empty, false otherwise.
+    * @return Verdadero si el stack está vacío
     */
     public boolean empty();
 

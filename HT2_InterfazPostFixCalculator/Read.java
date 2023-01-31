@@ -11,23 +11,32 @@ import java.util.Scanner;
 
 public class Read {
 
-    void leer(){
-        System.out.println("Ingrese la ruta del archivo ej C:\\ejemplos\\example1.txt");
-        Scanner in = new Scanner(System.in);
-        String fpath = in.nextLine();
-        
-      try {
-        File myObj = new File(fpath);
-        Scanner myReader = new Scanner(myObj);
-        while (myReader.hasNextLine()) {
-          String data = myReader.nextLine();
-          System.out.println(data);
-        }
-        myReader.close();
-      } catch (FileNotFoundException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
+    Read(){}
+
+    /**
+     * para leer el archivo 
+     * 
+     * 
+     **/    
+    
+    String leer(String scs){
+        String data = " ";
+        String fpath = scs;
+            
+     try {
+            File myObj = new File(fpath);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+            data = myReader.nextLine();
+              System.out.println(data);
+              return data;
+            }
+            myReader.close();
+     } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+     }
+        return data;
     }
     
 }

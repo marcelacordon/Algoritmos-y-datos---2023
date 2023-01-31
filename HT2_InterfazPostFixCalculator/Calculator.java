@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Calculator implements IPostfixCalculator{
 
-    Stack<Integer> stack = new Stack<Integer>();
+    
 
     Calculator (){}
 
@@ -19,7 +19,9 @@ public class Calculator implements IPostfixCalculator{
         if (operandos.size() == 1){
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     @Override
@@ -60,7 +62,12 @@ public class Calculator implements IPostfixCalculator{
     @Override
     public ArrayList<String> getItems(String _expresion) {
         // TODO Auto-generated method stub
-        return null;
+        ArrayList<String> ite = new ArrayList<String>();
+        String [] items = _expresion.split(" ");
+        for (int i = 0; i < items.length; i++){
+            ite.add(items[i]);
+        }
+        return ite;
     }
     
 }
