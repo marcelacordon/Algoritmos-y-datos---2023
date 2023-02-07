@@ -95,7 +95,7 @@ public class Controller {
                 sorter.Quicksort(lista, 0, lista.length-1);
             }
             else if (choice2 ==4){
-                sorter.radixSort(lista);
+                sorter.radixsort(lista);
             }
             else if (choice2 == 5) {
                 sorter.bubblesort(lista);

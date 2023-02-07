@@ -58,7 +58,7 @@ public class Read {
     try (FileWriter writer = new FileWriter(file)) {
       Random random = new Random();
       for (int i = 0; i < values; i++) {
-        int number = random.nextInt();
+        int number = random.nextInt(1,3000);
         writer.write(String.valueOf(number));
         writer.write("\n");
       }

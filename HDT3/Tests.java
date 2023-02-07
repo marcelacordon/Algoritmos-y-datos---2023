@@ -27,13 +27,13 @@ public class Tests {
 
     @Test
     public void Testradix(){
-        Sorts.radixSort(prueba);
+        Sorts.radixsort(prueba);
         Arrays.equals(new int[]{2,3,4,5,6,6,7,8,9,10}, prueba);
     }
 
     @Test
     public void Testbubble(){
-        Sorts.radixSort(prueba);
+        Sorts.bubblesort(prueba);
         Arrays.equals(new int[]{2,3,4,5,6,6,7,8,9,10}, prueba);
     }
 
