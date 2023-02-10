@@ -10,6 +10,6 @@ public class Main {
         chucha.speak();
 
         Animal mishi = AnimalFactory.getAnimal("cat", "Luni");
-        cat.speak();
+        mishi.speak();
     }
 }
