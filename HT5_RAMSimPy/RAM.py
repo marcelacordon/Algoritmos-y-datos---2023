@@ -37,8 +37,16 @@ def generar_proceso(env, nombre, ram, cpu, instrucciones):
         print(f"Proceso {nombre} <TERMINADO> - Tiempo: {env.now:.1f}")
         yield ram.put(memoria_necesaria)
 
+env = simpy.Environment()
+
+ram = simpy.Container(env, init=RAM_SIZE, capacity=RAM_SIZE)
+cpu = simpy.Resource(env, capacity=2)
+
+for i in range(PROCESOS):
+    env.process(generar_proceso(env, f"{i}", ram, cpu, random.expovariate(1.0 / INTERVALO)))
 
 
+env.run(until=TIEMPO)
 
 
 
