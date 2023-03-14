@@ -3,6 +3,7 @@ public class Controller {
     LispInterpreter lispo = new LispInterpreter();
     boolean cont = true;
     Aritmetica a = new Aritmetica();
+    Predicados p = new Predicados();
 
     public void Work(){
         while(cont == true){
@@ -23,7 +24,9 @@ public class Controller {
 
             }
             else if (choice == 5){
-
+                String input = view.Input();
+                String respuesta = p.Predicate(input);
+                System.out.println(respuesta);
             }
             else if (choice == 6){
 
