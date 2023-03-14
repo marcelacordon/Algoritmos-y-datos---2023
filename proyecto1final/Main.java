@@ -3,7 +3,7 @@ public class Main {
         Controller cont = new Controller();
         LispInterpreter lis = new LispInterpreter();
 
-        System.out.println(lis.parse("( + 2 3 )"));
+        cont.Work();;
     
     }
 }

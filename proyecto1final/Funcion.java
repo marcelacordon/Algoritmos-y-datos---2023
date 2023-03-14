@@ -4,7 +4,7 @@ import java.util.Map;
 /**
  * Clase que representa una función en LISP.
  */
-public class Funcion extends Expresion {
+public class Funcion{
     private List<String> parameters;
     private Expresion body;
 
@@ -21,10 +21,7 @@ public class Funcion extends Expresion {
         return body;
     }
 
-    @Override
-    public Object evaluate(Map<String, Expresion> environment) {
-        return new Closure(environment, parameters, body);
-    }
+    
 }
 
 

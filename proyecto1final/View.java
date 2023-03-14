@@ -11,7 +11,7 @@ public class View {
     }
 
     public String Input(){
-        System.out.println("Ingrese la instucción: ");
+        System.out.println("Ingrese la instrucción: ");
         res = sc.next();
         res+= sc.nextLine();
         return res;
