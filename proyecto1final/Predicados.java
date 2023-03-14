@@ -64,7 +64,6 @@ public class Predicados {
             else if (Character.isDigit(info) || info == '.'){
                 mientras.append(info);
                 antes = true;
-
             }
 
         }

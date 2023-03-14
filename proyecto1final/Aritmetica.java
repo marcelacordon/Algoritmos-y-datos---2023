@@ -3,6 +3,8 @@ import java.util.Stack;
 
 public class Aritmetica {
 
+    View view = new View();
+
     public double LispAritmetica(String input){
         Stack stack = new Stack<>();
         boolean sum = false;
@@ -128,11 +130,23 @@ public class Aritmetica {
             if(respuesta == 0){
                 double dato2 = (double) stack.pop();
                 double dato1 = (double) stack.pop();
-                respuesta = dato1/dato2;
+                if(dato2 == 0){
+                    view.NoCero();
+                    break;
+                }
+                else{
+                    respuesta = dato1/dato2;
+                }
             }
             else if (respuesta != 0){
                 double dato1 = (double) stack.pop();
-                respuesta = respuesta/dato1;
+                if(dato1 == 0){
+                    view.NoCero();
+                    break;
+                }
+                else{
+                    respuesta = respuesta/dato1;
+                }
             }
         }
         return respuesta;

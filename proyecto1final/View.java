@@ -20,4 +20,8 @@ public class View {
     public void Despedida(){
         System.out.println("GRACIAS POR UTILIZAR EL INTERPRETADOR DE LISP");
     }
+
+    public void NoCero(){
+        System.out.println("No es posible dividir dentro de 0");
+    }
 }
