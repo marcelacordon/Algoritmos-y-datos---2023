@@ -11,8 +11,8 @@ public class Controller {
             int choice = view.MenuPrincipal();
             if(choice == 1){
                 String input = view.Input();
-                double respuesta = a.LispAritmetica(input);
-                System.out.println(respuesta);
+                //double respuesta = a.LispAritmetica(input);
+                //System.out.println(respuesta);
             }
             else if (choice == 2){
 
