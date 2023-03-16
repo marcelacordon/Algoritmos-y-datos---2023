@@ -1,60 +1,33 @@
-import java.util.Map;
-import java.util.Stack;
 
-/**
- * Clase que representa la operación de quote en LISP.
- */
 public class QuoteExpression {
 
-    public String quoteexp (String quote){
-        String result = "Resultado: ( ";
-        int open = 0;
-        int close = 0;
-        Stack stack = new Stack<>();
-        StringBuilder mientras = new StringBuilder();
-        for(int i = 0; i < quote.length(); i++){
-            char info = quote.charAt(i);
-            if (info == '(' ){
-                open ++;
-                continue;
+    /**
+     * Método que toma una expresión LISP con la operación quote (') y devuelve su contenido.
+     * @param expr expresión LISP con la operación '.
+     * @return contenido dentro de la expresión.
+     */
+    public String getquoteexp(String expr) {
+        StringBuilder expresion = new StringBuilder();
+        if (expr.contains("'")){
+            for (char c : expr.toCharArray()){
+                if (c == '\'' || c == '(' || c == ')'|| c == ' '){
+                    continue;
+                }
+                else{
+                    expresion.append(c+ " ");
+                }
             }
-            else if (info == ' '){
-                continue;
-            }
-            else if (info == 's'){
-                mientras.append(info);
-            }
-            else if (info == 'e'){
-                mientras.append(info);
-            }
-            else if (info == 't'){
-                mientras.append(info);
-            }
-            else if (info == 'q'){
-                mientras.append(info);
-            }
-            else if (info == ')' ){
-                close++;
-                continue;
-            }
-            else {
-                stack.push(Character.toString(info));
-            }
-        }
-        if (close != open && mientras.toString() != "setq"){
-            result = "La expresion que ingreso es incorrecta";
         }
         else{
-            Stack stackfinal = new Stack<>();
-            while(!stack.isEmpty()){
-                stackfinal.push(stack.pop());
-            }
-            while (!stackfinal.isEmpty()){
-                result += stackfinal.pop() + " ";
-            }
+            return "Expresion invalida";
         }
-        return result += ")";
+        return "Expresion: " + expresion.toString();
     }
-
 }
+
+
+
+
+
+
 

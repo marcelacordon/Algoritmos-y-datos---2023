@@ -1,171 +1,133 @@
 import java.util.*;
-import java.util.Stack;
 
 public class Aritmetica {
 
-    View view = new View();
-
-    public double LispAritmetica(String input){
-        Stack stack = new Stack<>();
-        boolean sum = false;
-        boolean rest = false;
-        boolean mult = false;
-        boolean div = false;
-        int open = 0;
-        int close = 0;
-        double respuesta = 0;
-        StringBuilder mientras = new StringBuilder();
-        boolean antes = false;
-        for(int i = 0; i < input.length(); i ++){
-            char info = input.charAt(i);
-            if(info == ' '){
-                if(antes == true){
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
+    /**
+    Método público para evaluar una cadena de expresión aritmética y devolver el resultado.
+    @param input La cadena de expresión aritmética a evaluar.
+    @return El resultado de la evaluación de la expresión.
+    */
+    public String evaluar(String input) {
+        Queue<String> tokens = tokenize(input);
+        return "Resultado = " + Double.toString(evaluarTokens(tokens));
+    }
+    
+    /**
+    Método para tokenizar una cadena de expresión aritmética.
+    @param input La cadena de expresión aritmética a tokenizar.
+    @return Una cola de tokens (números, operadores y paréntesis) obtenida al tokenizar la expresión.
+    */
+    private Queue<String> tokenize(String input) {
+        Queue<String> tokens = new LinkedList<>();
+        StringBuilder TokenPrincipal = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c) || c == '.') {
+                TokenPrincipal.append(c);
+            } 
+            else if (Character.isWhitespace(c)) {
+                if (TokenPrincipal.length() > 0) {
+                    tokens.add(TokenPrincipal.toString());
+                    TokenPrincipal = new StringBuilder();
                 }
-                continue;
-            }
-            else if (info == '('){
-                open++;
-                if(antes == true){
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
+            } 
+            else if (c == '(' || c == ')') {
+                if (TokenPrincipal.length() > 0) {
+                    tokens.add(TokenPrincipal.toString());
+                    TokenPrincipal = new StringBuilder();
                 }
-            }
-            else if (info == ')'){
-                close++;
-                if(antes == true){
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
+                tokens.add(String.valueOf(c));
+            } 
+            else {
+                if (TokenPrincipal.length() > 0) {
+                    tokens.add(TokenPrincipal.toString());
+                    TokenPrincipal = new StringBuilder();
                 }
-            }
-            else if (info == '+'){
-                sum = true;
-                if(antes == true){
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-            }
-            else if (info == '-'){
-                rest = true;
-                if(antes == true){
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-            }
-            else if (info == '*'){
-                mult = true;
-                if(antes == true){
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-            }
-            else if (info == '/'){
-                div = true;
-                if(antes == true){
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-            }
-            else if (Character.isDigit(info) || info == '.'){
-                mientras.append(info);
-                antes = true;
+                tokens.add(String.valueOf(c));
             }
         }
-        respuesta = calc(sum, rest, mult, div, open, close, stack);
-        return respuesta;
+        if (TokenPrincipal.length() > 0) {
+            tokens.add(TokenPrincipal.toString());
+        }
+        return tokens;
+    }
+    
+
+     /**
+    Método para evaluar la cola de tokens.
+    @param tokens La cola aritmetica ya tokenizada.
+    @return Double como respuesta de realizar las operaciones.
+    */
+    private double evaluarTokens(Queue<String> tokens) {
+        Stack<Double> stackValores = new Stack<>();
+        Stack<String> stackOperandos = new Stack<>();
+        while (!tokens.isEmpty()) {
+            String token = tokens.poll();
+            if (isNumero(token)) {
+                stackValores.push(Double.parseDouble(token));
+            } 
+            else if (token.equals("(")) {
+                stackOperandos.push(token);
+            } 
+            else if (token.equals(")")) {
+                while (!stackOperandos.peek().equals("(")) {
+                    evaluarTop(stackValores, stackOperandos);
+                }
+                stackOperandos.pop(); 
+            } 
+            else {
+                while (!stackOperandos.isEmpty() && hasPrecedence(token, stackOperandos.peek())) {
+                    evaluarTop(stackValores, stackOperandos);
+                }
+                stackOperandos.push(token);
+            }
+        }
+        while (!stackOperandos.isEmpty()) {
+            evaluarTop(stackValores, stackOperandos);
+        }
+        return stackValores.pop();
     }
 
-    public double suma(Stack stack){
-        double respuesta = 0;
-        while(!stack.isEmpty()){
-            double dato = (double) stack.pop();
-            respuesta = respuesta + dato;
-        }
-        return respuesta;
+     /**
+    Método para evaluar si un caracter es un numero.
+    @param token Caracter individual
+    @return Booleano dependiendo si es numero o no.
+    */
+    private boolean isNumero(String token) {
+        return token.matches("\\d+(\\.\\d+)?");
     }
+    
 
-    public double resta(Stack stack){
-        double respuesta = 0;
-        while(!stack.isEmpty()){
-            if(respuesta == 0){
-                double dato2 = (double) stack.pop();
-                double dato1 = (double) stack.pop();
-                respuesta = dato1-dato2;
-            }
-            else if (respuesta != 0){
-                double dato1 = (double) stack.pop();
-                respuesta = respuesta-dato1;
-            }
+    /**
+    Método para evaluar si un caracter es un numero.
+    @param token Caracter individual
+    @param token Caracter individual
+    @return Booleano dependiendo si es numero o no.
+    */
+    private boolean hasPrecedence(String op1, String op2) {
+        if (op2.equals("(") || op2.equals(")")) {
+            return false;
         }
-        return respuesta;
+        if ((op1.equals("*") || op1.equals("/")) && (op2.equals("+") || op2.equals("-"))) {
+            return false;
+        }
+        return true;
     }
-
-    public double multiplicacion(Stack stack){
-        double respuesta = 0;
-        while(!stack.isEmpty()){
-            if(respuesta == 0){
-                double dato2 = (double) stack.pop();
-                double dato1 = (double) stack.pop();
-                respuesta = dato1*dato2;
-            }
-            else if (respuesta != 0){
-                double dato1 = (double) stack.pop();
-                respuesta = respuesta*dato1;
-            }
+    
+    private void evaluarTop(Stack<Double> stackValores, Stack<String> stackOperandos) {
+        double val2 = stackValores.pop();
+        double val1 = stackValores.pop();
+        String op = stackOperandos.pop();
+        if (op.equals("+")) {
+            stackValores.push(val1 + val2);
+        } 
+        else if (op.equals("-")) {
+            stackValores.push(val1 - val2);
+        } 
+        else if (op.equals("*")) {
+            stackValores.push(val1 * val2);
+        } 
+        else if (op.equals("/")) {
+            stackValores.push(val1 / val2);
         }
-        return respuesta;
-    }
-
-    public double division(Stack stack){
-        double respuesta = 0;
-        while(!stack.isEmpty()){
-            if(respuesta == 0){
-                double dato2 = (double) stack.pop();
-                double dato1 = (double) stack.pop();
-                if(dato2 == 0){
-                    view.NoCero();
-                    break;
-                }
-                else{
-                    respuesta = dato1/dato2;
-                }
-            }
-            else if (respuesta != 0){
-                double dato1 = (double) stack.pop();
-                if(dato1 == 0){
-                    view.NoCero();
-                    break;
-                }
-                else{
-                    respuesta = respuesta/dato1;
-                }
-            }
-        }
-        return respuesta;
-    }
-
-    public double calc(boolean sum, boolean rest, boolean mult, boolean div, int open, int close, Stack stack){
-        double respuesta = 0;
-        if(sum == true && open == close){
-            respuesta = suma(stack);
-        }
-        if(rest == true && open == close){
-            respuesta = resta(stack);
-        }
-        if(mult == true && open == close){
-            respuesta = multiplicacion(stack);
-        }
-        if(div == true && open == close){
-            respuesta = division(stack);
-        }
-        return respuesta;
     }
 }
