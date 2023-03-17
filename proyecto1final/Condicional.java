@@ -56,7 +56,7 @@ public class Condicional {
     ArrayList<String> tokens = new ArrayList<String>();
     StringBuilder sb = new StringBuilder();
     boolean inQuotes = false;
-    for (int i = 1; i < input.length() - 1; i++) {
+    for (int i = 0; i < input.length(); i++) {
         char c = input.charAt(i);
         if (c == '(' || c == ')') {
             if (sb.length() > 0) {
@@ -83,9 +83,29 @@ public class Condicional {
     if (sb.length() > 0) {
         tokens.add(sb.toString());
     }
-    return tokens;
+
+    ArrayList<String> result = new ArrayList<String>();
+    String comparison = "";
+    for (int i = 0; i < tokens.size(); i++) {
+        String token = tokens.get(i);
+        if (token.equals("<") || token.equals(">") || token.equals("=")) {
+            comparison += token + " " + tokens.get(i+1) + " " + tokens.get(i+2);
+            i += 2;
+        } else {
+            if (!comparison.equals("")) {
+                result.add(comparison);
+                comparison = "";
+            }
+            result.add(token);
+        }
+    }
+    if (!comparison.equals("")) {
+        result.add(comparison);
+    }
+    return result;
+    }
 }
 
 
 
-}
+

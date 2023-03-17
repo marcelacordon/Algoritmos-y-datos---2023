@@ -3,9 +3,12 @@ import java.util.ArrayList;
 public class Main {
     public static void main (String [] args) {
 
-
-        Condicional con = new Condicional();
-        System.out.println(con.cond("(cond ((> 3 5) 'mayor) ((< 3 5) 'menor) (t 'igual))"));
+        String code = "(defun sum (a b) (+ a b))";
+        String[] parameters = {"a", "b"};
+        DefunCalculator calculator = new DefunCalculator(code, parameters);
+        double[] values = {2.5, 3.7};
+        String result = calculator.calculate(values);
+        System.out.println(result);
         // Agregar función
 
 /*         Controller cont = new Controller();

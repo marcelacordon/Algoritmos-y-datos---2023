@@ -17,14 +17,16 @@ public class DefunCalculator {
         StringTokenizer tokenizer = new StringTokenizer(code, "() ");
         tokenizer.nextToken(); // "defun"
         functionName = tokenizer.nextToken();
+        ArrayList<String> parameterList = new ArrayList<>(); // Usar un ArrayList para guardar los parámetros
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
             if (token.equals("(")) {
                 break;
             } else {
-                parameters.add(token);
+                parameterList.add(token); // Añadir cada parámetro a la lista
             }
         }
+        parameters = parameterList.toArray(new String[parameterList.size()]); // Convertir la lista en un array
         ArrayList<String> expressionList = new ArrayList<>();
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
@@ -47,9 +49,9 @@ public class DefunCalculator {
             }
         }
         String codeToCalculate = sb.toString();
-        Calculator calculator = new Calculator();
-        double result = calculator.calculate(codeToCalculate);
-        return "Result: " + Double.toString(result);
+        Aritmetica calculator = new Aritmetica();
+        String result = calculator.evaluar(codeToCalculate);
+        return "Result: " + result;
     }
 
     private boolean isParameter(String token) {
