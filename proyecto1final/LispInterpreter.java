@@ -1,8 +1,19 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:11/03/2023
+ **/
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LispInterpreter {
 
+  
+  /** 
+   * @param input
+   * @return List<Object>
+   */
   public List<Object> parse(String input) {
     List<Object> elements = new ArrayList<>();
     int i = 0;
@@ -33,6 +44,11 @@ public class LispInterpreter {
     return elements;
 }
 
+
+/** 
+ * @param input
+ * @return int
+ */
 private int getExpressionLength(String input) {
     int i = 0;
     int count = 0;

@@ -1,4 +1,8 @@
-
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:14/03/2023
+ **/
 public class QuoteExpression {
 
     /**

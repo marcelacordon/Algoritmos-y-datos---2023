@@ -1,3 +1,9 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:16/03/2023
+ **/
+
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +21,11 @@ public class DefunCalculator {
         parameters = param;
         funcion = funct;
     }
+    
+    /** 
+     * @param defunct
+     * @param saveddefun
+     */
     public void setdefun (String defunct, ArrayList<DefunCalculator> saveddefun){
         if (defunct.contains("defun")){
             String[] tokens = defunct.split(" ");
@@ -33,6 +44,11 @@ public class DefunCalculator {
         }
     }
 
+    
+    /** 
+     * @param defunct
+     * @param saveddefun
+     */
     public void testsaveddefun(String defunct, ArrayList<DefunCalculator> saveddefun){
         String finalanswer = "";
         ArrayList<String> parameters = new ArrayList<>();
@@ -69,17 +85,34 @@ public class DefunCalculator {
         
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName() {
         return name;
     }
+    
+    /** 
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getParameters() {
         return parameters;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getFuncion() {
         return funcion;
     }
     
+    
+    /** 
+     * @param str
+     * @return String
+     */
     public String addSpacesToString(String str) {
         String result = "";
         for (int i = 0; i < str.length(); i++) {

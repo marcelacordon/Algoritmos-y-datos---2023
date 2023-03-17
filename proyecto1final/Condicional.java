@@ -1,12 +1,21 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:15/03/2023
+ **/
+
 import java.util.ArrayList;
 
 public class Condicional {
     Predicados p = new Predicados();
     private String evaluar;
     private String print;
-
-
-    //Funcion principal para condicionales 
+ 
+    /** 
+     * @param input
+     * @return String
+     * Funcion principal para condicionales. Convierte el input en tokens y evalua subtokens. 
+     */
     public String cond(String input){
         String result = "NIL";
         int i = 1;
@@ -50,24 +59,45 @@ public class Condicional {
         return result; 
     }
 
-    //Gets y Set de Métodos
+    
+    /** 
+     * @param evaluar
+     */
     public void setEvaluar(String evaluar) {
         this.evaluar = evaluar;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getEvaluar() {
         return this.evaluar;
     }
 
+    
+    /** 
+     * @param print
+     */
     public void setPrint(String print) {
         this.print = print;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPrint() {
         return this.print;
     }
 
-    //Convertir los tokens a subtokens
+   
+    
+    /** 
+     * @param input
+     * @return ArrayList<String>
+     * Convierte los tokens a subtokens. 
+     */
     public static ArrayList<String> subtoken(String input) {
         ArrayList<String> tokens = new ArrayList<String>();
         StringBuilder sb = new StringBuilder();

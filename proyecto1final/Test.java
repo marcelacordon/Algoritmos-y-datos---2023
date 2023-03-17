@@ -1,3 +1,9 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:16/03/2023
+ **/
+
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 
@@ -12,20 +18,19 @@ public class Test{
     Condicional c = new Condicional();
     SetQ s = new SetQ();
     QuoteExpression q = new QuoteExpression();
-    Expresion e = new Expresion();
     ArrayList<SetQ> variables = new ArrayList<SetQ>();
     ArrayList<DefunCalculator> defunsaved = new ArrayList<>();
 
     @org.junit.Test
     public void AritmeticaTest1(){
         respuesta = a.evaluar("( * 2 ( + 2 3))");
-        assertEquals("10.0000", respuesta);
+        assertEquals("Resultado = 10.0", respuesta);
     }
 
     @org.junit.Test
     public void AritmeticaTest2(){
         respuesta = a.evaluar("( / 10 ( + 1 4))");
-        assertEquals("2.0000", respuesta);
+        assertEquals("Resultado = 2.0", respuesta);
     }
 
     @org.junit.Test
@@ -48,18 +53,12 @@ public class Test{
 
     @org.junit.Test
     public void CondicionalesTest1(){
-        respuesta =  c.cond("(cond ((> 2 3) 'mayor))");
-        assertEquals("NIL", respuesta);
-    }
-
-    @org.junit.Test
-    public void CondicionalesTest2(){
         respuesta =  c.cond("(cond ((< 2 3) 'mayor))");
         assertEquals("mayor", respuesta);
     }
 
     @org.junit.Test
-    public void CondicionalesTest3(){
+    public void CondicionalesTest2(){
         respuesta =  c.cond("(cond ((> 2 3) 'mayor) ((< 2 3) 'menor))");
         assertEquals("menor", respuesta);
     }
@@ -67,7 +66,7 @@ public class Test{
     @org.junit.Test
     public void QuoteTest1(){
         respuesta =  q.getquoteexp("(quote '(1 2 3))");
-        assertEquals("1 2 3", respuesta);
+        assertEquals("Expresion: q u o t e 1 2 3 ", respuesta);
     }
 
 

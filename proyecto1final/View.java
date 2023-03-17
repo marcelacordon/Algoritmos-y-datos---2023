@@ -1,3 +1,9 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:10/03/2023
+ **/
+
 import java.util.Scanner;
 
 public class View {
@@ -5,7 +11,10 @@ public class View {
     String res;
     int resp;
 
-
+    
+    /** 
+     * @return String
+     */
     public String Input(){
         System.out.println("Ingrese la instrucción: ");
         res = sc.next();
@@ -29,6 +38,10 @@ public class View {
         System.out.println("5. Si desea salir del interprete, ingrese 0\n\n\n\n\n");
     }
 
+    
+    /** 
+     * @param res
+     */
     public void Res(String res){
         System.out.println(res);
     }

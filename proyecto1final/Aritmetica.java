@@ -1,3 +1,9 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:14/03/2023
+ **/
+
 import java.util.*;
 
 public class Aritmetica {

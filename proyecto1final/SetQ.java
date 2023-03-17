@@ -1,3 +1,9 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:16/03/2023
+ **/
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;
@@ -16,6 +22,12 @@ public class SetQ{
         this.value = valor;
     }
 
+    
+    /** 
+     * @param input
+     * @param variables
+     * @return String
+     */
     public String setq(String input, ArrayList<SetQ> variables){
         String setqanswer = "";
         String[] tokens = input.replaceAll("[\\(\\)]", "").split("\\s+");
@@ -33,9 +45,17 @@ public class SetQ{
         return setqanswer;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getLetra() {
         return letra;
     }
+    
+    /** 
+     * @return int
+     */
     public int getValue() {
         return value;
     }

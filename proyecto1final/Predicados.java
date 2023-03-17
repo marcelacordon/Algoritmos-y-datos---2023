@@ -1,6 +1,17 @@
+/**
+ * @author: Sofia Garcia, Diego Duarte
+ * 
+ * @since:14/03/2023
+ **/
+
 import java.util.Stack;
 
 public class Predicados {
+    
+    /** 
+     * @param input
+     * @return String
+     */
     public String Predicate(String input){
     String respuesta = "NIL";
     if (input.contains("listp")){
@@ -214,6 +225,11 @@ public class Predicados {
     }
 }
     
+ 
+ /** 
+  * @param cadena
+  * @return boolean
+  */
  public static boolean esNumerico(String cadena) {
     try {
         Double.parseDouble(cadena);
