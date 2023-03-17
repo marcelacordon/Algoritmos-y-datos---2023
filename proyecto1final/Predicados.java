@@ -2,13 +2,7 @@ import java.util.Stack;
 
 public class Predicados {
     public String Predicate(String input){
-    Stack<Double> stack = new Stack<>();
-    boolean mayor = false;
-    boolean menor = false;
-    boolean igual = false;
     String respuesta = "NIL";
-    StringBuilder mientras = new StringBuilder();
-    boolean antes = false;
     if (input.contains("listp")){
         int i = 7;
         int open = 1;
@@ -80,87 +74,153 @@ public class Predicados {
             return "NIL";
         }
     }
-    else{
-        for (int i = 0; i < input.length(); i++) {
-            char info = input.charAt(i);
-            if(info == ' '){ 
-                if (antes == true) {
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
+    else if(input.contains("<")){
+         int i = 3;
+        int open = 1;
+        int close = 0;
+        Stack<Double> nums = new Stack();
+        String[] tokens = input.split("\\s+"); 
+        while (i<tokens.length){
+            if (tokens[i].equals("(")){
+                return "NIL";
+            }
+            else if (tokens[i].equals(" ")){
+                i++;
                 continue;
             }
-            else if (info == '('){ 
-                if (antes == true) {
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-                break;
+            else if (tokens[i].equals(")")){
+                i++;
+                close++;
+                continue;
             }
-            else if (info == ')'){ 
-                if (antes == true) {
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
+            else if (esNumerico(tokens[i])){
+                if (tokens[i].endsWith(")")) { 
+                    tokens[i] = tokens[i].substring(0, tokens[i].length() - 1); 
                 }
-                break;
-            }
-            else if (info == '<'){ 
-                menor = true;
-                if (antes == true) {
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-                break;
-            }
-            else if (info == '>'){ 
-                mayor = true;
-                if (antes == true) {
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-                break;
-            }
-            else if (info == '='){ 
-                igual = true;
-                if (antes == true) {
-                    stack.push(Double.parseDouble(mientras.toString()));
-                    mientras = new StringBuilder();
-                    antes = false;
-                }
-                break;
-            }
-            else if (Character.isDigit(info) || info == '.'){ 
-                mientras.append(info);
-                antes = true;
-                break;
+                nums.push(Double.parseDouble(tokens[i]));
+                i++;
             }
             else{
-                continue;
-            }           
+                i++;
+            continue;
+            }
         }
-        if (mayor == true) {
-        double valor2 = stack.pop();
-        double valor1 = stack.pop();
-        respuesta = (valor1 > valor2) ? "T" : "NIL";
+        if (open == 1 && close == 1){
+            double num2 = nums.pop();
+            double num1 = nums.pop();
+            if(num1 < num2){
+                return "T";
+            }
+            else{
+                return "NIL";
+            }     
         }
-        else if (menor == true) {
-        double valor2 = stack.pop();
-        double valor1 = stack.pop();
-        respuesta = (valor1 < valor2) ? "T" : "NIL";
+        else{
+            return "NIL";
         }
-        else if (igual == true) {
-        double valor2 = stack.pop();
-        double valor1 = stack.pop();
-        respuesta = (valor1 == valor2) ? "T" : "NIL";
-        }
-        return respuesta;
     }
-
- }
+    else if(input.contains(">")){
+        int i = 3;
+        int open = 1;
+        int close = 0;
+        Stack<Double> nums = new Stack();
+        String[] tokens = input.split("\\s+"); 
+        while (i<tokens.length){
+            if (tokens[i].equals("(")){
+                return "NIL";
+            }
+            else if (tokens[i].equals(" ")){
+                i++;
+                continue;
+            }
+            else if (tokens[i].equals(")")){
+                i++;
+                close++;
+                continue;
+            }
+            else if (esNumerico(tokens[i])){
+                if (tokens[i].endsWith(")")) { 
+                    tokens[i] = tokens[i].substring(0, tokens[i].length() - 1); 
+                }
+                    nums.push(Double.parseDouble(tokens[i]));
+                    i++;
+            }
+            else{
+                i++;
+            continue;
+            }
+        }
+        if (open == 1 && close == 1){
+            double num2 = nums.pop();
+            double num1 = nums.pop();
+            if(num1 > num2){
+                return "T";
+            }
+            else{
+                return "NIL";
+            }     
+        }
+        else{
+            return "NIL";
+        }
+    }
+    else if(input.contains("=")){
+        int i = 3;
+        int open = 1;
+        int close = 0;
+        Stack<Double> nums = new Stack();
+        String[] tokens = input.split("\\s+"); 
+        while (i<tokens.length){
+            if (tokens[i].equals("(")){
+                return "NIL";
+            }
+            else if (tokens[i].equals(" ")){
+                i++;
+                continue;
+            }
+            else if (tokens[i].equals(")")){
+                i++;
+                close++;
+                continue;
+            }
+            else if (esNumerico(tokens[i])){
+                if (tokens[i].endsWith(")")) { 
+                    tokens[i] = tokens[i].substring(0, tokens[i].length() - 1); 
+                }
+                nums.push(Double.parseDouble(tokens[i]));
+                i++;
+            }
+            else{
+                i++;
+            continue;
+            }
+        }
+        if (open == 1 && close == 1){
+            double num2 = nums.pop();
+            double num1 = nums.pop();
+            if(num1 == num2){
+                return "T";
+            }
+            else{
+                return "NIL";
+            }     
+        }
+        else{
+            return "NIL";
+        }
+    }
+    else{
+        return "NIL";
+    }
+}
+    
+ public static boolean esNumerico(String cadena) {
+    try {
+        Double.parseDouble(cadena);
+        return true;
+    } catch (NumberFormatException e) {
+        return false;
+    }
+}
 
 }

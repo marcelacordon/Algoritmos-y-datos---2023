@@ -2,12 +2,19 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main (String [] args) {
-        Controller cont = new Controller();
+
+
+        Condicional con = new Condicional();
+        System.out.println(con.cond("(cond ((> 3 5) 'mayor) ((< 3 5) 'menor) (t 'igual))"));
+        // Agregar función
+
+/*         Controller cont = new Controller();
         LispInterpreter lis = new LispInterpreter();
         QuoteExpression q = new QuoteExpression();
         Predicados p = new Predicados();
         Aritmetica ari = new Aritmetica();
         SetQ set = new SetQ();
+        Condicional con = new Condicional();
         ArrayList<SetQ> setqvariables = new ArrayList<SetQ>();
 
         System.out.println(ari.evaluar("( * 2 ( + 2 3))"));
@@ -16,10 +23,14 @@ public class Main {
         
         System.out.println(set.setq("(setq x 42 b 30)", setqvariables));
         
-        System.out.println(p.Predicate("(listp '(1 2 3))"));
-        System.out.println(p.Predicate("(atom '( 1 2 3 ))"));
-        System.out.println(p.Predicate("(listp '1)"));
-        System.out.println(p.Predicate("(atom '123)"));
+        //System.out.println(p.Predicate("(listp '(1 2 3))"));
+        //System.out.println(p.Predicate("(atom '( 1 2 3 ))"));
+        //System.out.println(p.Predicate("(listp '1)"));
+        //System.out.println(p.Predicate("(atom '123)"));
+        System.out.println(p.Predicate("(= 5 5)"));
+        System.out.println("condicionales");
+        con.cond("(cond (> 5 10) (= 5 5) (< 2 3))"); */
+       
 
 
     
