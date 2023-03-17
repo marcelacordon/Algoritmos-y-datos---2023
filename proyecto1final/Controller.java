@@ -49,6 +49,7 @@ public class Controller {
                 view.Res(respuesta);
             }
             else if(input.equals("0")){
+                view.Despedida();
                 cont = false;
                 break;
             }
