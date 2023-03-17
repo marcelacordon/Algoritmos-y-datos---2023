@@ -11,10 +11,6 @@ public class View {
     String res;
     int resp;
 
-    
-    /** 
-     * @return String
-     */
     public String Input(){
         System.out.println("Ingrese la instrucción: ");
         res = sc.next();
