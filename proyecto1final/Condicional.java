@@ -4,11 +4,13 @@ public class Condicional {
     Predicados p = new Predicados();
     private String evaluar;
     private String print;
+    String result = "NIL";
 
+
+    //Funcion principal para condicionales 
     public String cond(String input){
         int i = 1;
-        boolean onetrue = false;
-        String result = " ";
+        boolean onetrue = true;
         input = input.substring(1, input.length() - 1);
         String[] tokens = input.split("\\s+(?=\\()");
         ArrayList<Condicional> condi = new ArrayList<Condicional>();
@@ -20,22 +22,32 @@ public class Condicional {
                 actual.setPrint(subtokens.get(1));
                 condi.add(actual);
                 actual = new Condicional();
+                i++;
             }
         }
-        while(onetrue == false){ 
-            for(int o = 0; i< condi.size(); o++){
-                if(condi.get(o).getEvaluar().equals("t")){
+        while(onetrue){ 
+            for(int o = 0; o < condi.size(); o++){
+                if(p.Predicate(condi.get(o).getEvaluar()).equals("T")){
                     result = condi.get(o).getPrint();
+                    onetrue = false;
+                    break;
                 }
-                else if(p.Predicate(condi.get(o).getEvaluar()).equals("T")){
+                else if(condi.get(o).getEvaluar().equals("t")){
                     result = condi.get(o).getPrint();
-                    onetrue = true;
+                    onetrue = false;
+                    break;
+                }
+                else{
+                    result = "NIL";
+                    onetrue = false;
+                    break;
                 }
             }
         }
         return result; 
     }
 
+    //Gets y Set de Métodos
     public void setEvaluar(String evaluar) {
         this.evaluar = evaluar;
     }
@@ -52,60 +64,43 @@ public class Condicional {
         return this.print;
     }
 
+    //Convertir los tokens a subtokens
     public static ArrayList<String> subtoken(String input) {
-    ArrayList<String> tokens = new ArrayList<String>();
-    StringBuilder sb = new StringBuilder();
-    boolean inQuotes = false;
-    for (int i = 0; i < input.length(); i++) {
-        char c = input.charAt(i);
-        if (c == '(' || c == ')') {
-            if (sb.length() > 0) {
-                tokens.add(sb.toString());
-                sb.setLength(0);
-            }
-            tokens.add(Character.toString(c));
-        } else if (c == '\'') {
-            inQuotes = !inQuotes;
-            if (sb.length() > 0) {
-                tokens.add(sb.toString());
-                sb.setLength(0);
-            }
-            tokens.add(Character.toString(c));
-        } else if (c == ' ' && !inQuotes) {
-            if (sb.length() > 0) {
-                tokens.add(sb.toString());
-                sb.setLength(0);
-            }
-        } else {
-            sb.append(c);
-        }
-    }
-    if (sb.length() > 0) {
-        tokens.add(sb.toString());
-    }
+        ArrayList<String> tokens = new ArrayList<String>();
+        StringBuilder sb = new StringBuilder();
+        boolean condicional = true;
+        char[] charArray = input.toCharArray();
+        boolean addt = false;
 
-    ArrayList<String> result = new ArrayList<String>();
-    String comparison = "";
-    for (int i = 0; i < tokens.size(); i++) {
-        String token = tokens.get(i);
-        if (token.equals("<") || token.equals(">") || token.equals("=")) {
-            comparison += token + " " + tokens.get(i+1) + " " + tokens.get(i+2);
-            i += 2;
-        } else {
-            if (!comparison.equals("")) {
-                result.add(comparison);
-                comparison = "";
+        for(int i = 1; i < charArray.length; i++){
+            if(charArray[1] == 't' && addt == false){
+                tokens.add("t");
+                condicional = false;
+                addt = true;
             }
-            result.add(token);
+            if(condicional == true){
+                if(charArray[i] == ')'){
+                    sb.append(charArray[i]);
+                    tokens.add(sb.toString());
+                    sb = new StringBuilder();
+                    condicional = false;
+                }
+                else{
+                    sb.append(charArray[i]);
+                }
+            }
+            else{
+                if(Character.isLetter(charArray[i])){
+                    sb.append(charArray[i]);
+                }
+            }
         }
-    }
-    if (!comparison.equals("")) {
-        result.add(comparison);
-    }
-    return result;
+        tokens.add(sb.toString());
+    
+    return tokens;
+    
     }
 }
-
 
 
 

@@ -5,10 +5,6 @@ public class View {
     String res;
     int resp;
 
-    public int MenuPrincipal(){
-        System.out.println("\t \t \t INTERPRETADOR DE LISP \n¿Qué desea hacer? \n1. ARITMETICA \n2. QUOTE\n3. DEFUN\n4. SETQ\n5. PREDICADOS (<,>,=)\n6. ATOM\n7. COND\n8.Salir del programa");
-        return resp = sc.nextInt();
-    }
 
     public String Input(){
         System.out.println("Ingrese la instrucción: ");
@@ -24,4 +20,22 @@ public class View {
     public void NoCero(){
         System.out.println("No es posible dividir dentro de 0");
     }
+
+    public void ManualDeUsuario(){
+        System.out.println("\n\n\n\n\nBIENVENIDO AL INTERPRETADOR DE LISP \n1. Sus intrucciones deben de ir escritas en solo una linea de código. \n  EJEMPLO: \n   (cond ((> 2 3) 'mayor) (= 2 3) 'igual)\n\nEjemplo de aritmeticas: ( * 1 2 )\nEjemplo de funciones ya creadas en defun: ( operacion 1 2 )\nEjemplos de como escribir quotes '(1 2 3 4)\nEjemplo para crear un nuevo defun: (defun operacion (xy) (*xy) )\n\nEjemplo para crear un setq: (setq x 42 b 30)\n\n Ejemplo para crear un cond: (cond ((< 8 9) 'x) ((= 0 1) 'y) (t 'z) ) *Se pueden poner más o menos parámetros \nEjemplo para crear Predicados: (atom x) (lisp y)");
+        System.out.println("2. Solo debe de poner espacios después de una función, variable, dato. (Los parentesis deben de ser una guía y es preferible que vayan juntos de esos parametros)");
+        System.out.println("3. Las instrucciones las debe de colocar en la terminal ");
+        System.out.println("4. Ingrese las instrucciones de 1 en 1");
+        System.out.println("5. Si desea salir del interprete, ingrese 0\n\n\n\n\n");
+    }
+
+    public void Res(String res){
+        System.out.println(res);
+    }
+
+    public void Error(){
+        System.out.println("Ingrese una instruccion valida");
+    }
+
+    
 }

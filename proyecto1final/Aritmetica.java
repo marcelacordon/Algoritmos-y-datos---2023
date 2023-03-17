@@ -127,7 +127,15 @@ public class Aritmetica {
             stackValores.push(val1 * val2);
         } 
         else if (op.equals("/")) {
-            stackValores.push(val1 / val2);
+            try {
+                if (val2 == 0) {
+                    throw new ArithmeticException("No se puede dividir dentro de 0");
+                }
+                stackValores.push(val1 / val2);
+            } catch (ArithmeticException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
     }
 }
+

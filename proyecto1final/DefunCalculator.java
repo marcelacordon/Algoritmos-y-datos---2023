@@ -1,76 +1,93 @@
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DefunCalculator {
-    private String code;
-    private String functionName;
-    private String[] parameters;
-    private String[] expression;
+    private String name;
+    private ArrayList<String> parameters;
+    private String funcion;
 
-    public DefunCalculator(String code, String[] parameters) {
-        this.code = code;
-        this.parameters = parameters;
-        parseCode();
+    DefunCalculator(){}
+    DefunCalculator(String nam, ArrayList<String> param, String funct ){
+        name = nam;
+        parameters = param;
+        funcion = funct;
+    }
+    public void setdefun (String defunct, ArrayList<DefunCalculator> saveddefun){
+        if (defunct.contains("defun")){
+            String[] tokens = defunct.split(" ");
+            String newname = tokens[1];
+            String funcions = tokens[3];
+            ArrayList<String> parameterss = new ArrayList<>();
+            String[] newparameters = tokens[2].split("");
+            for (int i = 1 ; i < newparameters.length - 1; i ++){
+                parameterss.add(newparameters[i]);
+            }
+            DefunCalculator defun = new DefunCalculator(newname, parameterss, funcions);
+            saveddefun.add(defun);
+        }
+        else {
+            System.out.println("Expresion invalida");
+        }
     }
 
-    private void parseCode() {
-        StringTokenizer tokenizer = new StringTokenizer(code, "() ");
-        tokenizer.nextToken(); // "defun"
-        functionName = tokenizer.nextToken();
-        ArrayList<String> parameterList = new ArrayList<>(); // Usar un ArrayList para guardar los parámetros
-        while (tokenizer.hasMoreTokens()) {
-            String token = tokenizer.nextToken();
-            if (token.equals("(")) {
-                break;
-            } else {
-                parameterList.add(token); // Añadir cada parámetro a la lista
+    public void testsaveddefun(String defunct, ArrayList<DefunCalculator> saveddefun){
+        String finalanswer = "";
+        ArrayList<String> parameters = new ArrayList<>();
+        for (int i = 0; i < saveddefun.size() ; i ++){
+            if (defunct.contains(saveddefun.get(i).getName())){
+                String [] tokens = defunct.split(" ");
+                int e = 2;
+                while (e < tokens.length -1 ){
+                    parameters.add(tokens[e]);
+                    e++;
+                    continue;
+                }
+                if (parameters.size() == saveddefun.get(i).getParameters().size()){
+                    String[]original = saveddefun.get(i).getFuncion().replaceAll("[()\\*\\+\\-\\/]", "").split("");
+                    String originalll = saveddefun.get(i).getFuncion();
+                    for (int l = 0; l <original.length; l++){
+                        if (originalll.contains(original[i])){
+                            originalll = originalll.replaceAll(original[l], parameters.get(l));
+                            i++;
+                            continue;
+                        }
+                    }
+
+                    String operacion = addSpacesToString(originalll);
+                    Aritmetica ari = new Aritmetica();
+                    finalanswer = ari.evaluar(operacion);
+                    System.out.println("Resultado: "+ finalanswer);
+            }
+            else{
+                System.out.println("error");
+            }
             }
         }
-        parameters = parameterList.toArray(new String[parameterList.size()]); // Convertir la lista en un array
-        ArrayList<String> expressionList = new ArrayList<>();
-        while (tokenizer.hasMoreTokens()) {
-            String token = tokenizer.nextToken();
-            if (token.equals(")")) {
-                break;
-            } else {
-                expressionList.add(token);
-            }
-        }
-        expression = expressionList.toArray(new String[expressionList.size()]);
+        
     }
 
-    public String calculate(double[] valueParams) {
-        StringBuilder sb = new StringBuilder();
-        for (String s : expression) {
-            if (isParameter(s)) {
-                sb.append(valueParams[getParameterIndex(s)]).append(" ");
-            } else {
-                sb.append(s).append(" ");
-            }
-        }
-        String codeToCalculate = sb.toString();
-        Aritmetica calculator = new Aritmetica();
-        String result = calculator.evaluar(codeToCalculate);
-        return "Result: " + result;
+    public String getName() {
+        return name;
+    }
+    public ArrayList<String> getParameters() {
+        return parameters;
     }
 
-    private boolean isParameter(String token) {
-        for (String param : parameters) {
-            if (param.equals(token)) {
-                return true;
-            }
+    public String getFuncion() {
+        return funcion;
+    }
+    
+    public String addSpacesToString(String str) {
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            result += str.charAt(i) + " ";
         }
-        return false;
+        return result.trim();
     }
 
-    private int getParameterIndex(String token) {
-        for (int i = 0; i < parameters.length; i++) {
-            if (parameters[i].equals(token)) {
-                return i;
-            }
-        }
-        return -1;
-    }
 }
 
 

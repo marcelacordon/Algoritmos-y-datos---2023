@@ -1,46 +1,73 @@
+import java.util.ArrayList;
+
 public class Controller {
     View view = new View();
+    String respuesta;
     LispInterpreter lispo = new LispInterpreter();
     boolean cont = true;
     Aritmetica a = new Aritmetica();
     Predicados p = new Predicados();
-
+    DefunCalculator d = new DefunCalculator();
+    Condicional c = new Condicional();
+    SetQ s = new SetQ();
+    QuoteExpression q = new QuoteExpression();
+    ArrayList<SetQ> variables = new ArrayList<SetQ>();
+    ArrayList<DefunCalculator> defunsaved = new ArrayList<>();
+    DefunCalculator defunner = new DefunCalculator();
+    
+    
+    //Funcionamiento Principal del programa
     public void Work(){
-        while(cont == true){
+        boolean cont = true;
+        while(cont == true){ 
+            view.ManualDeUsuario();
+            String input = view.Input();
 
-            int choice = view.MenuPrincipal();
-            if(choice == 1){
-                String input = view.Input();
-                //double respuesta = a.LispAritmetica(input);
-                //System.out.println(respuesta);
+            if(input.contains("listp") || input.contains("atom") || input.contains("<") || input.contains(">") || input.contains("=")){
+                respuesta = p.Predicate(input);
+                view.Res(respuesta);
             }
-            else if (choice == 2){
-
-            }
-            else if (choice == 3){
-
-            }
-            else if (choice == 4){
+            else if(input.contains("cond")){
+                respuesta = c.cond(input);
+                view.Res(respuesta);
 
             }
-            else if (choice == 5){
-                String input = view.Input();
-                String respuesta = p.Predicate(input);
-                System.out.println(respuesta);
-            }
-            else if (choice == 6){
+            else if(input.contains("defun")){
+                defunner.setdefun(input, defunsaved);
 
             }
-            else if (choice == 7){
-
+            else if(input.contains("setq")){
+                respuesta = s.setq(input, variables);
+                view.Res(respuesta);
             }
-            else if (choice == 8){
+            else if(input.contains("'")){
+                respuesta = q.getquoteexp(input);
+                view.Res(respuesta);
+            }
+            else if(input.contains("+") || input.contains("-") || input.contains("*") || input.contains("/")){
+                respuesta = a.evaluar(input);
+                view.Res(respuesta);
+            }
+            else if(input.equals("0")){
                 cont = false;
-                view.Despedida();
                 break;
             }
+            else{
+                for (int i = 0; i < defunsaved.size(); i ++){
+                    if (input.contains(defunsaved.get(i).getName())){
+                        defunner.testsaveddefun(input, defunsaved);
+                        break;
+                    }
+                    else{
+                        i++;
+                        view.Error();
+                    }
+                }
+            }
         }
-
+            
+        
     }
-
 }
+
+

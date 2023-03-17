@@ -79,7 +79,7 @@ public class Predicados {
         int open = 1;
         int close = 0;
         Stack<Double> nums = new Stack();
-        String[] tokens = input.split("\\s+"); 
+        String[] tokens = input.split(""); 
         while (i<tokens.length){
             if (tokens[i].equals("(")){
                 return "NIL";
@@ -124,7 +124,7 @@ public class Predicados {
         int open = 1;
         int close = 0;
         Stack<Double> nums = new Stack();
-        String[] tokens = input.split("\\s+"); 
+        String[] tokens = input.split(""); 
         while (i<tokens.length){
             if (tokens[i].equals("(")){
                 return "NIL";
@@ -169,7 +169,7 @@ public class Predicados {
         int open = 1;
         int close = 0;
         Stack<Double> nums = new Stack();
-        String[] tokens = input.split("\\s+"); 
+        String[] tokens = input.split(""); 
         while (i<tokens.length){
             if (tokens[i].equals("(")){
                 return "NIL";
