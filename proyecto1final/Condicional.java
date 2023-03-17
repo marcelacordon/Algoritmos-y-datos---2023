@@ -4,11 +4,11 @@ public class Condicional {
     Predicados p = new Predicados();
     private String evaluar;
     private String print;
-    String result = "NIL";
 
 
     //Funcion principal para condicionales 
     public String cond(String input){
+        String result = "NIL";
         int i = 1;
         boolean onetrue = true;
         input = input.substring(1, input.length() - 1);
@@ -25,7 +25,7 @@ public class Condicional {
                 i++;
             }
         }
-        while(onetrue){ 
+        while(onetrue == true){ 
             for(int o = 0; o < condi.size(); o++){
                 if(p.Predicate(condi.get(o).getEvaluar()).equals("T")){
                     result = condi.get(o).getPrint();
@@ -36,6 +36,9 @@ public class Condicional {
                     result = condi.get(o).getPrint();
                     onetrue = false;
                     break;
+                }
+                else if(p.Predicate(condi.get(o).getEvaluar()).equals("NIL")){
+                    continue;
                 }
                 else{
                     result = "NIL";

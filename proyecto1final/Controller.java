@@ -23,14 +23,13 @@ public class Controller {
             view.ManualDeUsuario();
             String input = view.Input();
 
-            if(input.contains("listp") || input.contains("atom") || input.contains("<") || input.contains(">") || input.contains("=")){
-                respuesta = p.Predicate(input);
-                view.Res(respuesta);
-            }
-            else if(input.contains("cond")){
+            if(input.contains("cond")){
                 respuesta = c.cond(input);
                 view.Res(respuesta);
-
+            }
+            else if(input.contains("listp") || input.contains("atom") || input.contains("<") || input.contains(">") || input.contains("=")){
+                respuesta = p.Predicate(input);
+                view.Res(respuesta);
             }
             else if(input.contains("defun")){
                 defunner.setdefun(input, defunsaved);
