@@ -22,7 +22,7 @@ public class View {
     }
 
     public void ManualDeUsuario(){
-        System.out.println("\n\n\n\n\nBIENVENIDO AL INTERPRETADOR DE LISP \n1. Sus intrucciones deben de ir escritas en solo una linea de código. \n  EJEMPLO: \n   (cond ((> 2 3) 'mayor) (= 2 3) 'igual)\n\nEjemplo de aritmeticas: ( * 1 2 )\nEjemplo de funciones ya creadas en defun: ( operacion 1 2 )\nEjemplos de como escribir quotes '(1 2 3 4)\nEjemplo para crear un nuevo defun: (defun operacion (xy) (*xy) )\n\nEjemplo para crear un setq: (setq x 42 b 30)\n\n Ejemplo para crear un cond: (cond ((< 8 9) 'x) ((= 0 1) 'y) (t 'z) ) *Se pueden poner más o menos parámetros \nEjemplo para crear Predicados: (atom x) (lisp y)");
+        System.out.println("\n\n\n\n\nBIENVENIDO AL INTERPRETADOR DE LISP \n1. Sus intrucciones deben de ir escritas en solo una linea de código.\nEJEMPLO: (cond ((> 2 3) 'mayor) (= 2 3) 'igual)\nEjemplo de aritmeticas: ( * 1 2 )\nEjemplo de funciones ya creadas en defun: ( operacion 1 2 )\nEjemplos de como escribir quotes '(1 2 3 4)\nEjemplo para crear un nuevo defun: (defun operacion (xy) (*xy) )\nEjemplo para crear un setq: (setq x 42 b 30)\nEjemplo para crear un cond: (cond ((< 8 9) 'x) ((= 0 1) 'y) (t 'z) ) *Se pueden poner más o menos parámetros\nEjemplo para crear Predicados: (atom 'x) o (listp '(1 2 3))\n");
         System.out.println("2. Solo debe de poner espacios después de una función, variable, dato. (Los parentesis deben de ser una guía y es preferible que vayan juntos de esos parametros)");
         System.out.println("3. Las instrucciones las debe de colocar en la terminal ");
         System.out.println("4. Ingrese las instrucciones de 1 en 1");
