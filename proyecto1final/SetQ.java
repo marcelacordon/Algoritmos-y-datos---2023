@@ -5,8 +5,6 @@
  **/
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Stack;
 
 /**
  * Clase que representa la operación de setq en LISP.

@@ -4,11 +4,8 @@
  * @since:16/03/2023
  **/
 
-import java.lang.reflect.Parameter;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DefunCalculator {
     private String name;
